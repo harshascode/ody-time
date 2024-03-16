@@ -1,75 +1,130 @@
 ---
 import { Container } from '@components/odyssey-theme';
-import Layout from './Page.astro'; 
+import Layout from './Page.astro';
 import { generateTagData } from '../utils/helpers';
+import Toc from '../components/Toc.astro';
 
-const {content: {title, description, publishDate, canonicalURL, featuredImage, tags} } = Astro.props;
+const {
+	content: {
+		title,
+		description,
+		publishDate,
+		canonicalURL,
+		featuredImage,
+		tags,
+	},
+} = Astro.props;
 
 let allTagsData = [];
 
-if(tags && tags.length > 0){
-  allTagsData = generateTagData(tags);
+if (tags && tags.length > 0) {
+	allTagsData = generateTagData(tags);
 }
 
 const seo = {
 	title,
 	description,
-  publishDate,
+	publishDate,
 	canonicalURL,
 	image: featuredImage,
 };
 ---
-<Layout seo={seo}> 
-  <div class="post-header__container"> 
-    <ul class="post-tags__list">
-      {allTagsData.map(tag => (
-        <li class="post-tags__tag">
-          <a href={`/blog/tags/${tag.slug}`}>
-            {tag.title}
-          </a>
-        </li>
-      ))}
-    </ul>
-    <h1>{title}</h1>
-    <p class="post-layout__date">
-      <time><em>{publishDate}</em></time>
-    </p>
-    {featuredImage && <img class="post-layout__img" src={featuredImage} alt={title} />}
-  </div>
-  <Container narrow>  
-    <article id="article">
-        <slot></slot>
-    </article>
-  </Container>
+
+<Layout seo={seo}>
+	<div class="post-header__container">
+		<ul class="post-tags__list">
+			{
+				allTagsData.map(tag => (
+					<li class="post-tags__tag">
+						<a href={`/tags/${tag.slug}`}>{tag.title}</a>
+					</li>
+				))
+			}
+		</ul>
+		<h1>{title}</h1>
+		<p class="post-layout__date">
+			<time><em>{publishDate}</em></time>
+		</p>
+		{
+			featuredImage && (
+				<img class="post-layout__img" src={featuredImage} alt={title} />
+			)
+		}
+	</div>
+	<!-- <Container narrow>
+		<article id="article">
+			<slot />
+		</article>
+	</Container> -->
+
+	<div class="container mx-auto px-1 py-8 post-header__container">
+		<main class="sm:flex gap-6">
+			<article class="lg:w-3/4 sm:w-3/4">
+				<div class="prose max-w-full">
+					<slot />
+				</div>
+			</article>
+
+			<div
+				class="lg:w-2/6 sm:w-2/6 sm:sticky lg:sticky top-0 right-0 left-0 bottom-0 mt-1 lg:mt-0 lg:pt-1 w-full text-base"
+			>
+				<div class="hidden sm:block lg:block">
+					<!-- Add sidebar content here, such as a search bar, links, or social media icons. -->
+					<button id="toggleButton" class="active:underline underline-offset-8"
+						>Table of Content</button
+					>
+					<div id="toc" class="text-base px-3 py-3 border border-gray-800">
+					</div>
+				</div>
+				<!-- Container for Table of Contents -->
+				<!-- <div class="mt-8 text-lg">
+					<p class="mb-1">Popular Posts</p>
+					<ul class="space-y-2">
+						<li class="bg-gray-300 p-2 rounded">
+							<a href="#" class="block">
+								The Best Electric Razors For Men (2024): A Definitive Guide
+							</a>
+						</li>
+						<li class="bg-gray-300 p-2 rounded">
+							<a href="#" class="block">
+								The Best Electric Razors For Men (2024): A Definitive Guide
+							</a>
+						</li>
+					</ul>
+				</div> -->
+			</div>
+		</main>
+	</div>
 </Layout>
+<Toc />
 
 <style>
-  #article {
-    padding-bottom: 3rem;
-  }
-  .post-header__container {
-    max-width: var(--theme-blog-post-header-width);
-    margin: 1rem auto;
-    padding: var(--container-padding);
-  }
-  .post-tags__list {
-    margin: 1rem auto;
-    padding: 0;
-    list-style: none;
-  }
-  .post-tags__tag {
-    text-transform: uppercase;
-  }
-  .post-tags__tag a {
-    font-size: var(--font-size-sm);
-    text-decoration: none;
-  }
-  .post-layout__img {
-    margin: 0 auto 1rem auto;
-    border-radius: var(--theme-shape-radius);
-  }
-  .post-layout__date {
-    margin-bottom: 1rem;
-    opacity: 0.84;
-  }
+	#article {
+		padding-bottom: 3rem;
+	}
+	.post-header__container {
+		max-width: var(--theme-blog-post-header-width);
+		margin: 1rem auto;
+		padding: var(--container-padding);
+	}
+	.post-tags__list {
+		margin: 1rem auto;
+		padding: 0;
+		list-style: none;
+	}
+	.post-tags__tag {
+		text-transform: uppercase;
+	}
+	.post-tags__tag a {
+		font-size: var(--font-size-sm);
+		text-decoration: none;
+	}
+	.post-layout__img {
+		margin: 0 auto 1rem auto;
+		border-radius: var(--theme-shape-radius);
+	}
+	.post-layout__date {
+		margin-bottom: 1rem;
+		opacity: 0.84;
+	}
 </style>

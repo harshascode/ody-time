@@ -19,3 +19,49 @@ pre {
 pre .language-id {
   display: none;
 }
+
+.container {
+    width: 100%;
+}
+@media (min-width: 640px) {
+    .container {
+        max-width: 100%;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+#toc{
+	display: block; /* Initially hide the TOC */
+}
+
+.toc-item {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.toc-item a {
+    text-decoration: none;
+    color: var(--theme-on-bg);
+}
+
+.toc-item a:hover {
+    color: var(--theme-on-bg);
+}
+
+.toc-item a:active {
+    text-decoration: underline;
+}
+
+.toc-item a {
+    /* Styles for h2 links */
+	padding-left: 0; /* Adjust padding as needed */
+}
+
+.toc-item a.nested-link {
+    /* Styles for nested h3 links */
+	padding-left: 20px; /* Adjust padding as needed */
+}

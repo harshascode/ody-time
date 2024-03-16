@@ -1,0 +1,59 @@
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const headings = document.querySelectorAll('article h2, article h3');
+		const tocContainer = document.getElementById('toc');
+
+		if (!tocContainer || headings.length === 0) return;
+
+		const tocList = document.createElement('ul');
+		tocList.setAttribute('aria-label', 'Table of Contents');
+
+		headings.forEach(heading => {
+			const listItem = document.createElement('li');
+			listItem.classList.add('toc-item');
+
+			const link = document.createElement('a');
+			link.textContent = heading.textContent;
+			link.href = `#${heading.id}`;
+			link.classList.add('toc-link');
+			link.addEventListener('click', event => {
+				event.preventDefault();
+
+				// Check if the event target is an anchor element
+				const targetAnchor = event.target as HTMLAnchorElement | null;
+				if (targetAnchor) {
+					headings.forEach(h => h.classList.remove('active'));
+					heading.classList.add('active');
+					const targetId = targetAnchor.getAttribute('href')?.substring(1);
+					const targetElement = document.getElementById(targetId!);
+
+					if (targetId && targetElement) {
+						window.scrollTo({
+							top: targetElement.offsetTop,
+							behavior: 'smooth',
+						});
+					}
+				}
+			});
+
+			if (heading.tagName.toLowerCase() === 'h3') {
+				link.classList.add('nested-link');
+			}
+
+			listItem.appendChild(link);
+			tocList.appendChild(listItem);
+		});
+
+		tocContainer.appendChild(tocList);
+
+		const toggleButton = document.getElementById('toggleButton');
+		if (toggleButton) {
+			toggleButton.addEventListener('click', () => {
+				const toc = document.getElementById('toc');
+				if (toc) {
+					toc.style.display = toc.style.display === 'none' ? 'block' : 'none';
+				}
+			});
+		}
+	});
+</script>
