@@ -49,10 +49,18 @@ a {
 }
 
 /* Make images easier to work with */
-img,
+/* img,
 picture {
 	max-width: 100%;
 	display: block;
+} */
+
+img,
+picture {
+    border: none;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.1), 0 0 6px 0 rgba(0,0,0,.1), 0 2px 2px -2px rgba(0,0,0,.15);
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Inherit fonts for inputs and buttons */

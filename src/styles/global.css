@@ -65,3 +65,20 @@ pre .language-id {
     /* Styles for nested h3 links */
 	padding-left: 20px; /* Adjust padding as needed */
 }
+
+h2{
+    margin: 65px 0 25px;
+}
+
+h3{
+    margin: 30px 0 20px;
+}
+
+h4{
+    margin: 30px 0 14px;
+    font-weight: 800;
+}
+
+p{
+    margin: 0 0 15px;
+}
