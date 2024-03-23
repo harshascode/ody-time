@@ -1,0 +1,16 @@
+---
+import Layout from './Base.astro';
+import type { Props as BaseHeadProps } from '../components/head/BaseHead.astro';
+
+export interface Props {
+	seo?: BaseHeadProps;
+}
+
+const { seo } = Astro.props as Props;
+---
+
+<Layout seo={seo}>
+	<div id="page">
+		<slot />
+	</div>
+</Layout>
