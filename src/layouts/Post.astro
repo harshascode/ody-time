@@ -31,11 +31,11 @@ const seo = {
 ---
 
 <Layout seo={seo}>
-	<div class="post-header__container">
+	<div class="post-header__container px-2 py-2 rounded-lg">
 		<ul class="post-tags__list">
 			{
 				allTagsData.map(tag => (
-					<li class="post-tags__tag">
+					<li class="post-tags__tag px-4 py-1 bg-blue-500 rounded-lg flex w-fit">
 						<a href={`/tags/${tag.slug}`}>{tag.title}</a>
 					</li>
 				))
@@ -59,21 +59,28 @@ const seo = {
 
 	<div class="container mx-auto px-1 py-8 post-header__container">
 		<main class="sm:flex gap-6">
-			<article class="lg:w-3/4 sm:w-3/4">
+			<article
+				class="lg:w-3/4 sm:w-3/4 bg-white px-2 py-2 lg:px-4 lg:py-4 rounded-lg"
+			>
 				<div class="prose max-w-full">
 					<slot />
 				</div>
 			</article>
 
 			<div
-				class="lg:w-2/6 sm:w-2/6 sm:sticky lg:sticky top-0 right-0 left-0 bottom-0 mt-1 lg:mt-0 lg:pt-1 w-full text-base"
+				class="lg:w-[28%] sm:w-2/6 sm:sticky lg:sticky top-0 right-0 left-0 bottom-0 mt-1 lg:mt-0 w-full h-fit text-base bg-white px-2 py-2 rounded-lg"
 			>
 				<div class="hidden sm:block lg:block">
 					<!-- Add sidebar content here, such as a search bar, links, or social media icons. -->
-					<button id="toggleButton" class="active:underline underline-offset-8"
+					<button
+						id="toggleButton"
+						class="active:underline underline-offset-8"
 						>Table of Content</button
 					>
-					<div id="toc" class="text-base px-3 py-3 border border-gray-800">
+					<div
+						id="toc"
+						class="text-base px-3 py-3 border border-gray-800"
+					>
 					</div>
 				</div>
 				<!-- Container for Table of Contents -->
@@ -82,12 +89,14 @@ const seo = {
 					<ul class="space-y-2">
 						<li class="bg-gray-300 p-2 rounded">
 							<a href="#" class="block">
-								The Best Electric Razors For Men (2024): A Definitive Guide
+								The Best Electric Razors For Men (2024): A
+								Definitive Guide
 							</a>
 						</li>
 						<li class="bg-gray-300 p-2 rounded">
 							<a href="#" class="block">
-								The Best Electric Razors For Men (2024): A Definitive Guide
+								The Best Electric Razors For Men (2024): A
+								Definitive Guide
 							</a>
 						</li>
 					</ul>
@@ -122,6 +131,7 @@ const seo = {
 	.post-layout__img {
 		margin: 0 auto 1rem auto;
 		border-radius: var(--theme-shape-radius);
+		padding-bottom: 8px;
 	}
 	.post-layout__date {
 		margin-bottom: 1rem;
